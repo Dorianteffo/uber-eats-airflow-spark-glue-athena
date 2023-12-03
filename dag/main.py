@@ -6,11 +6,7 @@ import argparse
 
 
 def transform_data(spark,data_source : str):
-    """
-    
-    
-    """
-    
+
     menu = spark.read.csv(f'{data_source}restaurant-menus.csv', header=True, inferSchema=True)
     restau = spark.read.csv(f'{data_source}restaurants.csv', header=True, inferSchema=True)
 
@@ -44,12 +40,11 @@ def transform_data(spark,data_source : str):
         
     return restau, menu
 
+    
+
  
 def create_table(spark, restau, menu, output:str):
-    """
-    
-    
-    """
+ 
     # Restaurant table
     restau_table = restau.dropDuplicates(subset=['name']) \
                             .withColumn("restaurant_id", F.monotonically_increasing_id()) \
