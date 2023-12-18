@@ -6,9 +6,8 @@ from airflow.providers.amazon.aws.operators.emr import (
     EmrAddStepsOperator,
     EmrTerminateJobFlowOperator
 )
-from airflow.providers.amazon.aws.sensors.emr import EmrJobFlowSensor, EmrStepSensor
+from airflow.providers.amazon.aws.sensors.emr import EmrStepSensor
 from airflow.providers.amazon.aws.operators.glue_crawler import GlueCrawlerOperator
-from airflow.providers.amazon.aws.sensors.glue_crawler import GlueCrawlerSensor
 from datetime import datetime, timedelta
 import configparser
 
