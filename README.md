@@ -1,6 +1,5 @@
 # Overview
-![architecture.PNG](images/Archietecture.PNG)
-
+![Architecture](images/Architecture.PNG)
 
 ## Tech Stack 
 * AWS Glue Data Catalog
@@ -14,11 +13,11 @@
 * SQL
 * Python
 
-## Overview 
-In this project, we created a entire workflow orchestrate with Airflow, which will upload the csv files and spark job in python to the S3 bucket, create an EMR Cluster to execute the spark job, that are going to clean the data and load it to another s3 bucket in avro format with the appropriate data model, create a glue crawler, and data catalog to query the resulting data with aws Athena. 
+## Project Overview 
+In this project, we created an entire workflow orchestrated with Airflow. The workflow involves uploading CSV files and executing a Spark job in Python on an S3 bucket. It creates an EMR Cluster to run the Spark job, which cleans the data and loads it into another S3 bucket in Avro format with the appropriate data model. Additionally, it creates a Glue Crawler and a Data Catalog to facilitate querying the resulting data with AWS Athena. 
 
-## Data model 
-![model/Data_model.PNG](data_model.PNG)
+## Data Model 
+![Data Model](model/Data_model.PNG)
 
 ## Airflow DAG 
-![images/airflow DAG.PNG](airflow_dag.PNG)
+![Airflow DAG](images/airflow_dag.PNG)
