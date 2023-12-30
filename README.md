@@ -20,4 +20,4 @@ In this project, we created an entire workflow orchestrated with Airflow. The wo
 ![Data Model](model/Data_model.PNG)
 
 ## Airflow DAG 
-![AirflowDAG](images/airflow DAG.PNG)
+![Airflow dag](images/airflow_dag.PNG)
