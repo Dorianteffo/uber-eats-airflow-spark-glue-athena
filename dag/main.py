@@ -1,7 +1,6 @@
 from pyspark.sql import functions as F
 from pyspark.sql import SparkSession
 from pyspark.sql.types import FloatType
-from pyspark.sql.window import Window
 import argparse
 
 
