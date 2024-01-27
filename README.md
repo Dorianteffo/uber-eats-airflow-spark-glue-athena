@@ -16,7 +16,7 @@
 ## Project Overview 
 In this project, we created an entire workflow orchestrated with Airflow. The workflow involves:
 
-- Uploading CSV files and running a Spark job on S3.
+- Uploading CSV files and spark script on S3.
 - Creating an EMR Cluster to execute the Spark job, which cleans the data and loads it into another S3 bucket in Avro format with the appropriate data model.
 - Creating a Glue Crawler and a Data Catalog to facilitate querying the resulting data with AWS Athena.
 - Querying the resulting tables with AWS Athena.

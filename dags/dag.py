@@ -83,6 +83,7 @@ emr_cluster_configuration = {
 }
 
 
+
 ### Spark step 
 spark_step = [{
     "Name": "MyPythonSparkStep",
@@ -98,6 +99,7 @@ spark_step = [{
     },
 }
 ]
+
 
 
 ### Dag arguments
