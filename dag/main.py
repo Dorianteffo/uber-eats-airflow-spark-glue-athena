@@ -4,10 +4,9 @@ from pyspark.sql.types import FloatType
 import argparse
 
 
-def transform_data(spark,data_source : str):
+def clean_menu_data(spark,data_source : str):
 
     menu = spark.read.csv(f'{data_source}restaurant-menus.csv', header=True, inferSchema=True)
-    restau = spark.read.csv(f'{data_source}restaurants.csv', header=True, inferSchema=True)
 
     # remove usd in the price 
     menu = menu.withColumn('price', F.split(menu['price'], " ")[0])
@@ -18,7 +17,14 @@ def transform_data(spark,data_source : str):
     # remove nulls
     menu = menu.filter((F.col('price').isNotNull()) & (F.col('restaurant_id').isNotNull())
                                 & (F.col('category').isNotNull()))
-    
+        
+    return menu
+
+
+def clean_restau_data(spark, data_source : str): 
+
+    restau = spark.read.csv(f'{data_source}restaurants.csv', header=True, inferSchema=True)
+
     # fill with 0 null records in score and ratings 
     restau = restau.withColumn('score', restau['score'].cast(FloatType())) \
                     .withColumn('ratings', restau['ratings'].cast(FloatType())) 
@@ -33,16 +39,17 @@ def transform_data(spark,data_source : str):
                                 .when(F.col('price_range')=='$$$$', "Very Expensive") \
                                 .otherwise("No price range"))
     
-    #create the city and state 
+    #create the city and state columns
     restau = restau.withColumn('city', F.split(restau["full_address"], ', ')[1]) \
                         .withColumn('state', F.split(restau["full_address"], ', ')[2])
-        
-    return restau, menu
+    
+    return restau
+
 
     
 
  
-def create_table(spark, restau, menu, output:str):
+def create_tables(spark, restau, menu, output:str):
  
     # Restaurant table
     restau_table = restau.dropDuplicates(subset=['name']) \
@@ -87,5 +94,6 @@ if __name__ == '__main__':
         parser.add_argument('--output')
         args = parser.parse_args()
 
-        restau, menu = transform_data(spark, args.data_source)
-        create_table(spark, restau, menu, args.output)
+        menu = clean_menu_data(spark, args.data_source)
+        restau = clean_restau_data(spark, args.data_source)
+        create_tables(spark, restau, menu, args.output)
